@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
+import Banner from './Banner';
 
 const Home = () => {
      
     return (
         <div>
-              <nav>
-                <h3 className='text-2xl'>COMPANY:</h3>
+             <Banner></Banner>
+              <nav className=''>
+                <h3 className='font-bold'>COMPANY:</h3>
+                 <ul className='list-none'>
                  <li>AUDI</li>
                  <li>TOYOTA</li>
                  <li>TESLA</li>
-                <h3 className='text-2xl'>CATEGORY</h3>
-                <li>SUV</li> 
+                 </ul>
+                <h3 className='font-bold'>CATEGORY</h3>
+                 <ul className='list-none'>
+                 <li>SUV</li> 
                 <li>CONVERTABLE</li> 
                 <li>SEDAN</li>
-                <h3 className='text-2xl'>PRICE RANGE</h3>
-                <input defaultValue="100,0000" type="number" className='input input-bordered' placeholder='ENTER MINIMUM PRICE'/>
-                <input defaultValue="500,0000" type="number" className='input input-bordered' placeholder='ENTER MAXIMUM PRICE PRICE'/>
+                 </ul>
+                <h3 className='font-bold'>PRICE RANGE</h3>
+                <input defaultValue="100,0000" className='input input-bordered' placeholder='ENTER MINIMUM PRICE'/>
+                <input defaultValue="500,0000"  className='input input-bordered' placeholder='ENTER MAXIMUM PRICE PRICE'/>
               </nav>
         </div>
     );
