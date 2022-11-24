@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookModal from './BookModal';
 
 const Cars = () => {
     const cars=useLoaderData();
-    console.log(cars)
+    const [bookCar,setBookCar]=useState(null)
+    
     return (
         <div className='grid grid-cols-1  md:grid-cols-3 my-10 mx-10'>
                {
@@ -21,7 +23,8 @@ const Cars = () => {
                       <p className='text-left'>USED:{car.used}</p>
                       
                       <div className="card-actions justify-center">
-                        <button className="btn bg-blue-500 btn-outline">Buy Now</button>
+                        <label onClick={()=>setBookCar(car)}  htmlFor='car-booking' className="btn bg-blue-500 btn-outline">Buy Now</label>
+                       { bookCar && <BookModal car={bookCar}></BookModal>}
                       </div>
                     </div>
                   </div>

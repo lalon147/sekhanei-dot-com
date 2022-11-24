@@ -7,6 +7,7 @@ import Register from "../../Pages/Authentication/Register";
 import Cars from "../../Pages/Car/Cars";
 import UserInfo from "../../Pages/Dashboard/UserInfo";
 import Home from "../../Pages/Home/Home";
+import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
 
 export const router=createBrowserRouter([
@@ -27,7 +28,7 @@ export const router=createBrowserRouter([
                 element:<Register></Register>
             },{
                 path:"/categories/:id",
-                element:<Cars></Cars>,
+                element:<PrivateRoute><Cars></Cars></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/categories/${params.id}`)
             }
         ]
