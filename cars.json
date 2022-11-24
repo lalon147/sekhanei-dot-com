@@ -1,0 +1,101 @@
+[
+
+   
+
+       {
+        "name":"toyota x corolla",
+        "company":"toyota",
+        "year":2013,
+        "present_price":100000,
+        "past_price":800000,
+        "seller_name":"kashfi mahjabin",
+        "seller_email":"kashfi.mahjabin1998@gmail.com",
+        "seller_verified":true,
+        "location":"dhaka",
+        "used":"2 years",
+        "posted":"Thu Nov 24 2022 15:02:04 GMT+0600",
+        "image":"https://keeno.app/storage/3483/2020_07_22_12_57_5f17e3591808e_upload.png"
+
+       },
+       {
+        "name":"toyota landcrusier",
+        "company":"toyota",
+        "year":2015,
+        "present_price":500000,
+        "past_price":900000,
+        "seller_name":"kashfi mahjabin",
+        "seller_email":"kashfi.mahjabin1998@gmail.com",
+        "seller_verified":true,
+        "location":"dhaka",
+        "used":"1.5 years",
+        "posted":"Thu Nov 24 2022 15:02:04 GMT+0600",
+        "image":"https://global.toyota/pages/news/images/2021/08/02/1330/001.jpg"
+
+       },
+       {
+        "name":"AUDI R8",
+        "company":"audi",
+        "year":2013,
+        "present_price":100000,
+        "past_price":800000,
+        "seller_name":"kashfi mahjabin",
+        "seller_email":"mahjabin.kashfi98@gmail.com",
+        "seller_verified":false,
+        "location":"sylhet",
+        "used":"4 years",
+        "posted":"Thu Nov 24 2022 15:02:04 GMT+0600",
+        "image":"https://imageio.forbes.com/specials-images/imageserve/6324de1bcfdcb162b6065097/3500-2022-Audi-R8-Spyder-V10-4/960x0.jpg?format=jpg&width=960"
+
+       },{
+        "name":"AUDI A6",
+        "company":"audi",
+        "year":2013,
+        "present_price":100000,
+        "past_price":800000,
+        "seller_name":"kashfi mahjabin",
+        "seller_email":"mahjabin.kashfi98@gmail.com",
+        "seller_verified":false,
+        "location":"sylhet",
+        "used":"5 years",
+        "posted":"Thu Nov 24 2022 15:02:04 GMT+0600",
+        "image":"https://stimg.cardekho.com/images/carexteriorimages/930x620/Audi/A6/6426/1571906388003/front-left-side-47.jpg"
+
+       },
+       {
+        "name":"LAMBORGINI Hurrcane",
+        "company":"lamborgini",
+        "year":2020,
+        "present_price":900000,
+        "past_price":1200000,
+        "seller_name":"lalon rahman",
+        "seller_email":"lalon.rahman.tirtha@gmail.com",
+        "seller_verified":false,
+        "location":"khulna",
+        "used":"1 years",
+        "posted":"Thu Nov 24 2022 15:02:04 GMT+0600",
+        "image":"https://stimg.cardekho.com/images/carexteriorimages/630x420/Lamborghini/Huracan-EVO/7195/1645612088168/front-left-side-47.jpg"
+
+       }
+       ,
+       {
+        "name":"LAMBORGINI AVENDATOR",
+        "company":"lamborgini",
+        "year":2020,
+        "present_price":900000,
+        "past_price":1200000,
+        "seller_name":"lalon rahman",
+        "seller_email":"lalon.rahman.tirtha@gmail.com",
+        "seller_verified":false,
+        "location":"khulna",
+        "used":"2 years",
+        "posted":"Thu Nov 24 2022 15:02:04 GMT+0600",
+        "image":"https://www.alainclass.com/wp-content/uploads/2020/01/2020-Lamborghini-Aventador-SVJ-Roadster-BLACK-09340-reshoot-3.jpg"
+
+       }
+
+
+
+
+       
+
+]
