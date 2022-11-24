@@ -9,6 +9,7 @@ const Home = () => {
     return (
         <div>
              <Banner></Banner>
+             <h1 className='text-4xl text-center font-bold text-blue-400 my-5'>Categories</h1>
              <Categories></Categories>
               
         </div>
