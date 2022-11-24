@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Category = ({image,name}) => {
+const Category = ({category}) => {
+    const {name,image}=category;
     return (
         <div
    className="hero my-20   "
