@@ -5,7 +5,11 @@ import Main from "../../layouts/Main";
 import Login from "../../Pages/Authentication/Login";
 import Register from "../../Pages/Authentication/Register";
 import Cars from "../../Pages/Car/Cars";
-import UserInfo from "../../Pages/Dashboard/UserInfo";
+import AddACar from "../../Pages/Dashboard/AddACar";
+import AddACategory from "../../Pages/Dashboard/AddACategory";
+import AllBuyers from "../../Pages/Dashboard/AllBuyers";
+import AllSellers from "../../Pages/Dashboard/AllSellers";
+import MyInfo from "../../Pages/Dashboard/MyInfo";
 import Home from "../../Pages/Home/Home";
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
@@ -40,7 +44,20 @@ export const router=createBrowserRouter([
         children:[
             {
                 path:"/dashboard",
-                element:<UserInfo></UserInfo>
+                element:<MyInfo></MyInfo>
+            },{
+                path:"/dashboard/all-sellers",
+                element:<AllSellers></AllSellers>
+            },{
+                path:"/dashboard/all-buyers",
+                element:<AllBuyers></AllBuyers>
+            },{
+                path:"/dashboard/add-category",
+                element:<AddACategory></AddACategory>
+
+            },{
+                path:"/dashboard/add-a-car",
+                element:<AddACar></AddACar>
             }
         ]
     }

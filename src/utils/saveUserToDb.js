@@ -1,5 +1,5 @@
-export const saveUserToDb=(email,role)=>{
-   const   user={email,role}
+export const saveUserToDb=(email,role,img)=>{
+   const   user={email,role,img}
     fetch("http://localhost:5000/users",{
         method:"POST",
         headers:{

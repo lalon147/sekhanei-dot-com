@@ -26,9 +26,10 @@ const Register = () => {
          method:"POST",
          body:formData       
         }).then(res=>res.json()).then(imgData=>{
-               profileUpdate(user,data.name,imgData.data.url).then(()=>toast.success("PROFILE UPDATED")) 
+               profileUpdate(user,data.name,imgData.data.url).then(()=>toast.success("PROFILE UPDATED"))
+               saveUserToDb(data.email,data.role,imgData.data.url); 
           })      
-      saveUserToDb(data.email,data.role);
+     
       nav("/")
       console.log(user)})
      .catch(error=>{
