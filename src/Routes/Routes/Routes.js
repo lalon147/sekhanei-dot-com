@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import Main from "../../layouts/Main";
 import Login from "../../Pages/Authentication/Login";
 import Register from "../../Pages/Authentication/Register";
 import Cars from "../../Pages/Car/Cars";
+import UserInfo from "../../Pages/Dashboard/UserInfo";
 import Home from "../../Pages/Home/Home";
 
 
@@ -37,7 +39,7 @@ export const router=createBrowserRouter([
         children:[
             {
                 path:"/dashboard",
-                element:
+                element:<UserInfo></UserInfo>
             }
         ]
     }

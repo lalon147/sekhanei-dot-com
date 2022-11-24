@@ -1,18 +1,35 @@
 import React, { useContext } from "react";
-
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/UserContext";
+import { saveUserToDb } from "../../utils/saveUserToDb";
+
 
 
 const Register = () => {
+  const nav=useNavigate();
   const { register, formState: { errors }, handleSubmit } = useForm();
-  const {createUser}=useContext(AuthContext)
-  const handleRegister=(data)=>{
-  console.log(data);
+  const {createUser,profileUpdate}=useContext(AuthContext); const imgHostKey=process.env.REACT_APP_IMAGE 
+
+  const handleRegister=async(data)=>{
+   const image=data.image[0]; 
+   const formData=new FormData();
+   formData.append("image",image);
+   
+   
    createUser(data.email,data.password)
     .then(result=>{
       const user=result.user;
+      const url=`https://api.imgbb.com/1/upload?key=${imgHostKey}`
+      fetch(url,{
+         method:"POST",
+         body:formData       
+        }).then(res=>res.json()).then(imgData=>{
+               profileUpdate(user,data.name,imgData.data.url).then(()=>toast.success("PROFILE UPDATED")) 
+          })      
+      saveUserToDb(data.email,data.role);
+      nav("/")
       console.log(user)})
      .catch(error=>{
       toast.error(`${error.message.slice(10,60)}`) 
