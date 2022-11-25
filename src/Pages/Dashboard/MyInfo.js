@@ -7,11 +7,11 @@ const MyInfo = () => {
     const {data=[]}=useQuery({
         queryKey:["user"],
         queryFn:()=>fetch(`http://localhost:5000/users?email=${user.email}`).then(res=>res.json()).then(data=>{
-            console.log(data)
+            
             return data
         })
     })
-    console.log(data);
+    ;
     return (
         <div className='flex justify-center space-x-5 '>
             <img className='w-64 h-64 rounded-full' src={user?.photoURL} alt=""/>

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../context/UserContext';
+import useRole from '../hooks/useRole';
 import Header from '../Shared/Header/Header';
 
 const DashboardLayout = () => {
+   const {user}=useContext(AuthContext);
+   const [isRole]=useRole(user.email);console.log(isRole)
     return (
         <div>
       <Header></Header>
@@ -19,6 +23,11 @@ const DashboardLayout = () => {
               <Link to="/dashboard">My Profile</Link>
             </li>
             <li>
+              <Link to="/dashboard/my-orders">My Orders</Link>
+            </li>
+              {
+                isRole==="admin"  && <>
+                <li>
             <Link to="/dashboard/all-sellers">All SELLERS</Link>
             </li>
             <li>
@@ -30,6 +39,18 @@ const DashboardLayout = () => {
             <li>
             <Link to="/dashboard/add-a-car">ADD A CAR</Link>          
             </li>
+                </>
+              }
+              {
+                isRole==="seller" && <>
+            <li>
+            <Link to="/dashboard/add-a-car">ADD A CAR</Link>          
+            </li>
+            <li>
+               <Link to="/dashboard/my-cars">MY CARS</Link>
+            </li>
+                </>
+              }
           </ul>
         </div>
       </div>

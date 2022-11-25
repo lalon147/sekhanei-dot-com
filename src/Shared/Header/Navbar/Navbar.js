@@ -5,7 +5,7 @@ import {FaUserAlt} from "react-icons/fa"
 import toast from 'react-hot-toast';
 
 const Navbar = () => {
-  const {user,logOut}=useContext(AuthContext);console.log(user)
+  const {user,logOut}=useContext(AuthContext);
   const nav=useNavigate();
   const handleLogout=()=>{
       logOut().then(()=>{
@@ -15,6 +15,8 @@ const Navbar = () => {
   }
     const listItems=<React.Fragment>
                       <li><Link className='btn btn-ghost ' to="/">HOME</Link></li>
+                      <li><Link className='btn btn-ghost ' to="/blogs">BLOGS</Link></li>
+
                       {
                         user?.uid ?                        
                         <>

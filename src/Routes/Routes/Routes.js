@@ -4,13 +4,16 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import Main from "../../layouts/Main";
 import Login from "../../Pages/Authentication/Login";
 import Register from "../../Pages/Authentication/Register";
+import Blogs from "../../Pages/Blogs/Blogs";
 import Cars from "../../Pages/Car/Cars";
 import AddACar from "../../Pages/Dashboard/AddACar";
 import AddACategory from "../../Pages/Dashboard/AddACategory";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers";
 import MyInfo from "../../Pages/Dashboard/MyInfo";
+import MyOrders from "../../Pages/Dashboard/MyOrders";
 import Home from "../../Pages/Home/Home";
+import NotFound from "../../Pages/NotFound/NotFound";
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
 
@@ -34,6 +37,9 @@ export const router=createBrowserRouter([
                 path:"/categories/:id",
                 element:<PrivateRoute><Cars></Cars></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/categories/${params.id}`)
+            },{
+                path:"/blogs",
+                element:<Blogs></Blogs>
             }
         ]
         
@@ -58,8 +64,14 @@ export const router=createBrowserRouter([
             },{
                 path:"/dashboard/add-a-car",
                 element:<AddACar></AddACar>
+            },{
+                path:"/dashboard/my-orders",
+                element:<MyOrders></MyOrders>
             }
         ]
+    },{
+        path:"*",
+        element:<NotFound></NotFound>
     }
 
 ])
