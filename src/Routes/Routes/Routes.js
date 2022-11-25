@@ -10,6 +10,7 @@ import AddACar from "../../Pages/Dashboard/AddACar";
 import AddACategory from "../../Pages/Dashboard/AddACategory";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers";
+import MyCars from "../../Pages/Dashboard/MyCars";
 import MyInfo from "../../Pages/Dashboard/MyInfo";
 import MyOrders from "../../Pages/Dashboard/MyOrders";
 import Home from "../../Pages/Home/Home";
@@ -67,6 +68,9 @@ export const router=createBrowserRouter([
             },{
                 path:"/dashboard/my-orders",
                 element:<MyOrders></MyOrders>
+            },{
+                path:"/dashboard/my-cars",
+                element:<MyCars></MyCars>
             }
         ]
     },{

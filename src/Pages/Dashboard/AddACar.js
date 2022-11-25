@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/UserContext';
 
 const AddACar = () => {
+     const {user}=useContext(AuthContext);
     const handleSubmit=(e)=>{
         e.preventDefault();
         const form=e.target;
@@ -35,7 +37,7 @@ const AddACar = () => {
         <input placeholder='PRESENT PRICE'  name="present_price" className='input input-bordered'></input>
         <input placeholder='ORIGINAL PRICE' name="past_price" className='input input-bordered'></input>
         <input placeholder='SELLER NAME'  name="seller_name" className='input input-bordered'></input>
-        <input placeholder='SELLER EMAIL' name="seller_email" className='input input-bordered'></input>
+        <input defaultValue={user?.email} placeholder='SELLER EMAIL' name="seller_email" className='input input-bordered'></input>
         <input placeholder='LOCATION' name="location" className='input input-bordered'></input>
         <input defaultValue={new Date()} name="posted" className='input input-bordered'></input>
         <input placeholder='PASTE THE IMAGE URL'  name="image" className='input input-bordered'></input>

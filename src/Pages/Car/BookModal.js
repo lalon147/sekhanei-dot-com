@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/UserContext';
 
 const BookModal = ({car}) => {
-     
+    const seller_email=car.seller_email
      const {user}=useContext(AuthContext);
      const handleSubmit=(e)=>{
         e.preventDefault();
@@ -15,7 +15,7 @@ const BookModal = ({car}) => {
         const carPrice=form.carPrice.value;
         const location=form.location.value;
         const phone=form.phone.value;
-        const booking={name,email,price,carName,carPrice,location,phone,image:car.image}
+        const booking={name,email,price,carName,carPrice,location,phone,image:car.image,seller_email}
         console.log(booking);
         fetch("http://localhost:5000/booking",{
           method:"POST",

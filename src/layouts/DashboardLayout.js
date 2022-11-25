@@ -22,9 +22,11 @@ const DashboardLayout = () => {
             <li>
               <Link to="/dashboard">My Profile</Link>
             </li>
-            <li>
+            {
+              isRole ==="user" && <li>
               <Link to="/dashboard/my-orders">My Orders</Link>
             </li>
+            }
               {
                 isRole==="admin"  && <>
                 <li>
