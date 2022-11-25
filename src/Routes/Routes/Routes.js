@@ -13,6 +13,7 @@ import AllSellers from "../../Pages/Dashboard/AllSellers";
 import MyCars from "../../Pages/Dashboard/MyCars";
 import MyInfo from "../../Pages/Dashboard/MyInfo";
 import MyOrders from "../../Pages/Dashboard/MyOrders";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 import Home from "../../Pages/Home/Home";
 import NotFound from "../../Pages/NotFound/NotFound";
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
@@ -71,6 +72,10 @@ export const router=createBrowserRouter([
             },{
                 path:"/dashboard/my-cars",
                 element:<MyCars></MyCars>
+            },{
+                path:"/dashboard/payment/:id",
+                element:<Payment></Payment>,
+                loader:({params})=>fetch(`http://localhost:5000/booking/${params.id}`)
             }
         ]
     },{
