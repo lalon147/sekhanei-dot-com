@@ -2,10 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
 
+
 const AllSellers = () => {
    const handleDelete=(id)=>{
+    // 
      fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/${id}`,{
       method:"DELETE",
+      headers:{
+        authorization:`bearer ${localStorage.getItem("token")}`
+       } 
       
      }).then(res=>res.json()).then(data=>{
       console.log(data)
@@ -15,17 +20,29 @@ const AllSellers = () => {
      })
    }
    const handleVeriify=(id,email)=>{
-      fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/${id}`).then(res=>res.json()).then(data=>{
+      fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/${id}`,{
+        headers:{
+          authorization:`bearer ${localStorage.getItem("token")}`
+         } 
+      }).then(res=>res.json()).then(data=>{
       refetch()
       fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/cars/verify-seller?email=${email}`,{
-        method:"POST"
+        method:"POST",
+        headers:{
+          authorization:`bearer ${localStorage.getItem("token")}`
+         } 
       }).then(res=>res.json()).then(data=>console.log(data)) 
       console.log(data)})
       
    }
+  //  
     const {data:sellers=[],refetch}=useQuery({
         queryKey:["user"],
-        queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users?email=seller`).then(res=>res.json()).then(data=>{
+        queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users?email=seller`,{
+          headers:{
+            authorization:`bearer ${localStorage.getItem("token")}`
+           } 
+        }).then(res=>res.json()).then(data=>{
              console.log(data)
              return data
         })

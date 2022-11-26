@@ -3,13 +3,19 @@ import React from 'react';
 import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
-
+  // 
   const handleDelete=(id)=>{
     fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/${id}`,{
      method:"DELETE",
+     headers:{
+      authorization:`bearer ${localStorage.getItem("token")}`
+     } 
      
     }).then(res=>res.json()).then(data=>{
-     console.log(data)
+     if(data.message==="Forbidden"){
+      toast.error("SOMETHING WENT WRONG PLEASE LOGIN AGAIN")
+      return
+     }
      toast.success("DELETION SUCESSFULL");
      refetch();
 
@@ -18,7 +24,11 @@ const AllBuyers = () => {
 
      const {data:buyers=[],refetch}=useQuery({
         queryKey:["buyers"],
-        queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users?email=user`).then(res=>res.json()).then(data=>{
+        queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users?email=user`,{
+          headers:{
+            authorization:`bearer ${localStorage.getItem("token")}`
+       } 
+        }).then(res=>res.json()).then(data=>{
             console.log(data)
             return data
         })
