@@ -33,6 +33,7 @@ const DashboardLayout = () => {
             </li>
             {
               isRole ==="user" && <li>
+              <Link to="/dashboard/wish-list">MY WISH LIST</Link>
               <Link to="/dashboard/my-orders">My Orders</Link>
             </li>
             }

@@ -14,6 +14,8 @@ import MyCars from "../../Pages/Dashboard/MyCars";
 import MyInfo from "../../Pages/Dashboard/MyInfo";
 import MyOrders from "../../Pages/Dashboard/MyOrders";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
+import WishList from "../../Pages/Dashboard/WishList/WishList";
+import ErrorElement from "../../Pages/ErrorElement/ErrorElement";
 import Home from "../../Pages/Home/Home";
 import NotFound from "../../Pages/NotFound/NotFound";
 import AdminRoute from "../AdminRoute/AdminRoute";
@@ -25,6 +27,7 @@ export const router=createBrowserRouter([
     {
         path:"/",
         element:<Main></Main>,
+        errorElement:<ErrorElement></ErrorElement>,
         children:[
             {
                 path:'/',
@@ -55,6 +58,7 @@ export const router=createBrowserRouter([
     {
         path:"/dashboard",
         element:<DashboardLayout></DashboardLayout>,
+        errorElement:<ErrorElement></ErrorElement>,
         children:[
             {
                 path:"/dashboard",
@@ -86,6 +90,9 @@ export const router=createBrowserRouter([
                         authorization:`bearer ${localStorage.getItem("token")}`
                    }
                 })
+            },{
+                path:"/dashboard/wish-list",
+                element:<WishList></WishList>
             }
         ]
     },{

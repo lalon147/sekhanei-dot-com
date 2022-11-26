@@ -2,9 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { GridLoader } from 'react-spinners';
 import {AuthContext} from "../../context/UserContext"
 
 const MyOrders = () => {
+      
       
       const {user,logOut}=useContext(AuthContext)
       const {data:bookings=[],isLoading}=useQuery({
@@ -17,12 +19,13 @@ const MyOrders = () => {
           if(data.message==="Forbidden"){
             toast.error("PLEASE LOGIN AGAIN");
             logOut()
-
           }
-          return data
-          
+          return data          
         })
       })
+      if(isLoading){
+        return <GridLoader size={50} color='rgba(54,100,100,1)'/>
+      }
      
       console.log(bookings);
     return (

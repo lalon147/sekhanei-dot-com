@@ -33,6 +33,7 @@ const Login = () => {
       const user=result.user;
       console.log(user);
       nav(from ,{replace:true})
+      getUserToken(user.email)
    }).catch(error=>{
      const message=error.message.slice(10,50);
      toast.error(`${message}`)

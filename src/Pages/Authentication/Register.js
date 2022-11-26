@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/UserContext";
 import { saveUserToDb } from "../../utils/saveUserToDb";
 import {FcGoogle} from "react-icons/fc";
+import { getUserToken } from "../../utils/getToken";
 
 
 
@@ -46,6 +47,7 @@ const Register = () => {
       const user=result.user;
       console.log(user);
       saveUserToDb(user.email,"user",user.photoURL);nav(from ,{replace:true})
+      getUserToken(user.email)
    }).catch(error=>{
      const message=error.message.slice(10,50);
      toast.error(`${message}`)
