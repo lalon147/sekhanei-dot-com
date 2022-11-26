@@ -13,7 +13,7 @@ const Cars = () => {
     const handleWishList=(car)=>{
       car.bookedBy=user.email;
       console.log(car);
-      fetch("http://localhost:5000/wish-list",{
+      fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/wish-list",{
         method:"POST",
         headers:{
           "content-type":"application/json",
