@@ -23,6 +23,9 @@ const MyCars = () => {
        refetch();
   
       })}
+      const handleAdvertise=(id)=>{
+        fetch(`http://localhost:5000/cars/${id}`).then(res=>res.json()).then(data=>console.log(data))
+      }
     return (
         <div className="overflow-x-auto">
   <table className="table w-full">
@@ -34,6 +37,7 @@ const MyCars = () => {
         <th>AVAILABILITY</th>
         <th>PRICE</th>
         <th>DELETE</th>
+        <th>ADVERTISEMENT</th>
       </tr>
     </thead>
     <tbody>
@@ -42,9 +46,11 @@ const MyCars = () => {
                 return  <tr key={product._id}>
                 <th>{index+1}</th>
                 <td>{product.name}</td>
-                <td>sold/available</td>
+                <td>{product.sold ? "SOLD" :"AVAILAVLE"}</td>
                 <td>{product.present_price}</td>
-                <td><button onClick={()=>handleDelete(product._id)} className='btn btn-xs'>DELETE</button></td>
+                <td><button  disabled={product.sold && true} onClick={()=>handleDelete(product._id)} className='btn btn-xs'>DELETE</button></td>
+             <td>{ !product.sold && <button onClick={()=>handleAdvertise(product._id)} className="btn btn-xs bg-blue-500">ADVERTISE</button> }</td>
+
               </tr>
              })
           }  
