@@ -15,7 +15,7 @@ const BookModal = ({car}) => {
         const carPrice=form.carPrice.value;
         const location=form.location.value;
         const phone=form.phone.value;
-        const booking={name,email,price,carName,carPrice,location,phone,image:car.image,seller_email}
+        const booking={name,email,price,carName,carPrice,location,phone,image:car.image,seller_email,carId:car._id}
         console.log(booking);
         fetch("http://localhost:5000/booking",{
           method:"POST",

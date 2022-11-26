@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import {AuthContext} from "../../context/UserContext";
 
 const Feedback = () => {
      const {user}=useContext(AuthContext);
-     const {data:comments=[]}=useQuery({
+     const {data:comments=[],refetch}=useQuery({
         queryKey:["comments"],
         queryFn:()=>fetch("http://localhost:5000/comments").then(res=>res.json()).then(data=>{
         console.log(data)
@@ -25,7 +26,11 @@ const Feedback = () => {
                 "content-type":"application/json"
             },
             body:JSON.stringify(comment)
-        }).then(res=>res.json()).then(data=>console.log(data))
+        }).then(res=>res.json()).then(data=>{
+          refetch();
+          toast.success("COMMENT ADDED");
+          e.target.reset();
+          console.log(data)})
     }
 
   return (

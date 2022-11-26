@@ -1,8 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllBuyers = () => {
-     const {data:buyers=[]}=useQuery({
+
+  const handleDelete=(id)=>{
+    fetch(`http://localhost:5000/users/${id}`,{
+     method:"DELETE",
+     
+    }).then(res=>res.json()).then(data=>{
+     console.log(data)
+     toast.success("DELETION SUCESSFULL");
+     refetch();
+
+    })
+  }
+
+     const {data:buyers=[],refetch}=useQuery({
         queryKey:["buyers"],
         queryFn:()=>fetch(`http://localhost:5000/users?email=user`).then(res=>res.json()).then(data=>{
             console.log(data)
@@ -17,7 +31,8 @@ const AllBuyers = () => {
         <th></th>
         <th>EMAIL</th>
         <th>ROLE</th>
-        <th>ID</th>       
+        <th>IMAGE</th>
+        <th>DELETE</th>       
       </tr>
     </thead>
     <tbody>       
@@ -28,6 +43,7 @@ const AllBuyers = () => {
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
                 <td><img src={seller.img} className="w-12 h-12 rounded-full" alt=""/></td>
+                <td><button onClick={()=>handleDelete(seller._id)} className='btn btn-xs bg-blue-500'>DELETE</button></td>
               </tr>
             })
         }

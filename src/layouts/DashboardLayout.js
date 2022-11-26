@@ -1,12 +1,16 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { HashLoader } from 'react-spinners';
 import { AuthContext } from '../context/UserContext';
 import useRole from '../hooks/useRole';
 import Header from '../Shared/Header/Header';
 
 const DashboardLayout = () => {
    const {user}=useContext(AuthContext);
-   const [isRole]=useRole(user.email);console.log(isRole)
+   const [isRole,isRoleLoading]=useRole(user.email);console.log(isRole)
+   if(isRoleLoading===true){
+    return  <div className='flex justify-center'><HashLoader color="#36d7b7" ></HashLoader></div>
+   }
     return (
         <div>
       <Header></Header>
@@ -37,9 +41,6 @@ const DashboardLayout = () => {
             </li>
             <li>
             <Link to="/dashboard/add-category">ADD A CATEGORY</Link>          
-            </li>
-            <li>
-            <Link to="/dashboard/add-a-car">ADD A CAR</Link>          
             </li>
                 </>
               }

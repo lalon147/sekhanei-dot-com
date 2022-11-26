@@ -16,6 +16,7 @@ import MyOrders from "../../Pages/Dashboard/MyOrders";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import Home from "../../Pages/Home/Home";
 import NotFound from "../../Pages/NotFound/NotFound";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
 
 
@@ -55,13 +56,13 @@ export const router=createBrowserRouter([
                 element:<MyInfo></MyInfo>
             },{
                 path:"/dashboard/all-sellers",
-                element:<AllSellers></AllSellers>
+                element:<AdminRoute><AllSellers></AllSellers></AdminRoute>
             },{
                 path:"/dashboard/all-buyers",
-                element:<AllBuyers></AllBuyers>
+                element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },{
                 path:"/dashboard/add-category",
-                element:<AddACategory></AddACategory>
+                element:<AdminRoute><AddACategory></AddACategory></AdminRoute>
 
             },{
                 path:"/dashboard/add-a-car",

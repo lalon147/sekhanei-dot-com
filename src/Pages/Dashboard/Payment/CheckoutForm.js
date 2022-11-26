@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {CardElement,useStripe,useElements} from "@stripe/react-stripe-js"
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutFomr = ({data}) => {
     const stripe=useStripe();
@@ -9,10 +10,11 @@ const CheckoutFomr = ({data}) => {
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState("");
-    const { carPrice, email, _id,seller_email } = data;console.log(data)
-
+    const { carPrice, email, _id,seller_email,carId } = data;
+    const nav=useNavigate()
     useEffect(() => {
       // Create PaymentIntent as soon as the page loads
+      
       fetch("http://localhost:5000/create-payment-intent", {
           method: "POST",
           headers: {
@@ -26,6 +28,7 @@ const CheckoutFomr = ({data}) => {
   }, [carPrice]);
 
   const handleSubmit = async (event) => {
+    
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -67,18 +70,35 @@ const CheckoutFomr = ({data}) => {
       setCardError(confirmError.message);
       return 
     }
-    console.log("paymentIntent",paymentIntent)
+    // console.log("paymentIntent",paymentIntent)
 
     if (paymentIntent.status === "succeeded") {
-      console.log('card info', card);
+      // console.log('card info', card);
       // store payment info in the database
       const payment = {
           carPrice,
           transactionId: paymentIntent.id,
           email,
-          bookingId: _id,seller_email,paid:true
+          bookingId: _id,seller_email,paid:true,carId
       }
-      fetch("http://localhost:5000/payments")
+      fetch("http://localhost:5000/payments",{
+        method:"POST",
+        headers:{
+          "content-type":"application/json"
+        },
+        body:JSON.stringify(payment)
+      }).then(res=>res.json()).then(data=>{
+        fetch(`http://localhost:5000/booking/${_id}`,{
+          method:"PUT",
+          
+        }).then(res=>res.json()).then(data=>console.log(data))
+        fetch(`http://localhost:5000/cars/${carId}`,{
+          method:"PUT"
+        }).then(res=>res.json()).then(data=>console.log(data))
+
+        nav("/dashboard/my-orders")
+        // console.log(data)
+        })
       
   }
   setProcessing(false);

@@ -35,7 +35,7 @@ const MyOrders = () => {
             <td><img className='w-12 h-12 rounded-full' src={booking.image} alt=""></img></td>
             <td>{booking.carName}</td>
             <td>{booking.carPrice}</td>
-            <td>{booking.payment ? <p>PAID</p> : <Link  to={`/dashboard/payment/${booking._id}`}className='btn btn-xs bg-blue-500'>PAY</Link> } </td>
+            <td>{booking.sold ? <p>PAID</p> : <Link  to={`/dashboard/payment/${booking._id}`}className='btn btn-xs bg-blue-500'>PAY</Link> } </td>
           </tr>
           })
         }

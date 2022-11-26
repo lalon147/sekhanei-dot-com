@@ -1,8 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/UserContext';
 
 const AddACar = () => {
      const {user}=useContext(AuthContext);
+     const nav=useNavigate();
+     const {data:categories=[]}=useQuery({
+        queryKey:["categories"],
+        queryFn:()=>fetch("http://localhost:5000/categories").then(res=>res.json()).then(data=>{
+            console.log(data)
+            return data;
+        })
+     })
     const handleSubmit=(e)=>{
         e.preventDefault();
         const form=e.target;
@@ -18,21 +29,30 @@ const AddACar = () => {
         const present_price=form.present_price.value;
      const car={
         name,company,present_price,past_price,seller_name,seller_email,location,used,posted,image
-     } 
+     }
+     
      fetch("http://localhost:5000/cars",{
         method:"POST",
         headers:{
             "content-type":"application/json"
         },
         body:JSON.stringify(car)
-     }).then(res=>res.json()).then(data=>console.log(data))
+     }).then(res=>res.json()).then(data=>{
+        toast.success("SUCCESSFULLY CAR ADDED")
+        e.target.reset();
+        nav("/dashboard/my-cars")
+        console.log(data)})
 
     }
     return (
         <form onSubmit={handleSubmit} className='flex flex-col space-y-4'>
              
         <input placeholder='TYPE THE NAME OF CAR' name='name'    className='input input-bordered'></input>
-        <input placeholder='TYPE THE NAME OF COMPANY' name="company" className='input input-bordered'></input>
+        <select name="company" className='select select-bordered'>
+           {
+            categories?.map(category=><option key={category._id} value={category.company}>{category.name}</option>)
+           }
+        </select>
         <input placeholder='HOW MANY YEARS USED' name="used" className='input input-bordered'></input>
         <input placeholder='PRESENT PRICE'  name="present_price" className='input input-bordered'></input>
         <input placeholder='ORIGINAL PRICE' name="past_price" className='input input-bordered'></input>

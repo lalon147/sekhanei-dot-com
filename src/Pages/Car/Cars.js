@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../context/UserContext';
+import useRole from '../../hooks/useRole';
 import BookModal from './BookModal';
 
 const Cars = () => {
+    const {user}=useContext(AuthContext);
+    const [isRole]=useRole(user?.email);
     const cars=useLoaderData();
     const [bookCar,setBookCar]=useState(null)
     
@@ -23,7 +27,7 @@ const Cars = () => {
                       <p className='text-left'>USED:{car.used}</p>
                       
                       <div className="card-actions justify-center">
-                        <label onClick={()=>setBookCar(car)}  htmlFor='car-booking' className="btn bg-blue-500 btn-outline">Buy Now</label>
+                        <label disabled={isRole==="admin" || isRole==="seller"  ? true :false }  onClick={()=>setBookCar(car)}  htmlFor='car-booking' className="btn bg-blue-500 btn-outline">Buy Now</label>
                        { bookCar && <BookModal car={bookCar}></BookModal>}
                       </div>
                     </div>
