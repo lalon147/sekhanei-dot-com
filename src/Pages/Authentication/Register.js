@@ -55,7 +55,7 @@ const Register = () => {
 
 
   return (
-    <div className="flex justify-between items-center w-11/12 mx-auto">
+    <div className="flex flex-col md:flex-row justify-between items-center w-11/12 mx-auto">
                   <div>
                           <img src="https://i.ibb.co/M6MH36p/6343845.jpg"
                                alt="6343845"

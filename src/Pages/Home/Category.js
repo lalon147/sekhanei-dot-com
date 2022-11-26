@@ -4,9 +4,9 @@ const Category = ({category}) => {
     const {name,image}=category;
     return (
         <div
-   className="hero my-20   "
+   className="hero "
    style={{ backgroundImage: `url(${image})`,
-             width:"24rem", }}
+              }}
  >
    <div className="hero-overlay bg-opacity-60"></div>
    <div className="hero-content text-center text-neutral-content">

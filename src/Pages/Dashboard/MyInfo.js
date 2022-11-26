@@ -13,12 +13,12 @@ const MyInfo = () => {
     })
     ;
     return (
-        <div className='flex justify-center space-x-5 '>
+        <div className='flex flex-col md:flex-row justify-center items-center space-x-5 '>
             <img className='w-64 h-64 rounded-full' src={user?.photoURL} alt=""/>
             <div className='shadow-lg p-4'>
-               <p className='text-xl font-bold'>NAME:{user.displayName}</p>
-               <p className='text-xl font-bold'>EMAIL:{user.email}</p>
-               <p className='text-xl font-bold'>ROLE:{data[0]?.role}</p>
+               <p className='text-xl text-left font-bold'>NAME:{user.displayName}</p>
+               <p className='text-xl text-left font-bold'>EMAIL:{user.email}</p>
+               <p className='text-xl text-left font-bold'>ROLE:{data[0]?.role}</p>
             </div >
         </div>
     );

@@ -20,12 +20,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex w-11/12 items-center justify-between  mx -auto ">
+    <div className="flex flex-col md:flex-row  items-center justify-evenly ">
       <div className="w-1/2">
         <img src="https://i.ibb.co/pX0s65j/20944201.jpg" alt="20944201" border="0"/>
       </div>
 
-      <div className="w-1/4">
+      <div className="">
         <form onSubmit={handleSubmit(handleLogin)} className="space-y-8 shadow-lg p-4">
           <h1 className="text-3xl text-blue-600"> LOGIN TO YOUR ACCOUNT</h1>
            <input

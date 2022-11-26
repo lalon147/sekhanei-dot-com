@@ -2,9 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import {AuthContext} from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
+
 
 const Feedback = () => {
      const {user}=useContext(AuthContext);
+     const nav=useNavigate();
      const {data:comments=[],refetch}=useQuery({
         queryKey:["comments"],
         queryFn:()=>fetch("http://localhost:5000/comments").then(res=>res.json()).then(data=>{
@@ -13,6 +16,10 @@ const Feedback = () => {
         })
      })
     const handleSubmit=(e)=>{
+        if(!user){
+          toast.error("LOGIN TO ADD FEEDBACK")
+          nav("/login")
+        }
         e.preventDefault();
         const text=e.target.comment.value;
         const comment={
@@ -34,7 +41,7 @@ const Feedback = () => {
     }
 
   return (
-        <div>
+        <div className="my-10">
          <h1 className="text-3xl font-semibold ">What Customers Says About us</h1>
          <div className="w-1/2 mx-auto my-10 grid grid-cols-1 md:grid-cols-3">
                 {
@@ -58,7 +65,7 @@ const Feedback = () => {
            
            <form onSubmit={handleSubmit}>
            <textarea name="comment" className="input input-bordered w-full"></textarea>
-           <input type="submit"  className="btn bg-blue-500" value={"COMMENT"}></input>
+           <input   type="submit"  className="btn bg-blue-500" value={"COMMENT"}></input>
            </form>
        </div>
     
