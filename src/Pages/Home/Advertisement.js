@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 const Advertisement = () => {
     const {data:cars=[],refetch}=useQuery({
         queryKey:["cars"],
-        queryFn:()=>fetch("http://localhost:5000/cars/advertise").then(res=>res.json()).then(data=>{
+        queryFn:()=>fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/cars/advertise").then(res=>res.json()).then(data=>{
             return data;
         })
     })

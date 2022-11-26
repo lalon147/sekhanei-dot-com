@@ -11,13 +11,20 @@ const AddACategory = () => {
         const image=form.image.value;
         const company=form.company.value;
         const category={name,image,company};console.log(category)
-        fetch("http://localhost:5000/categories",{
+        // 
+        fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/categories",{
             method:"POST",
             headers:{
-                "content-type":"application/json"
+                "content-type":"application/json",
+                 authorization:`bearer ${localStorage.getItem("token")}`
             },
             body:JSON.stringify(category)
         }).then(res=>res.json()).then(data=>{
+            if(data.message==="Forbidden"){
+                toast.error("SOMETHING WENT WRONG ");
+                form.reset();
+                return 
+            }
             toast.success("CATEGORY ADDED SUCESSFULLY ")
             form.reset();
             nav("/")

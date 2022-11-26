@@ -1,4 +1,4 @@
-import { data } from 'autoprefixer';
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Category from './Category';
@@ -7,7 +7,7 @@ import Category from './Category';
 const Categories = () => {
      const [categories,setCategories]=useState([]);
      useEffect(()=>{
-       fetch("http://localhost:5000/categories")
+       fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/categories")
        .then(res=>res.json()).then(data=>{
         setCategories(data);
        })
@@ -17,7 +17,7 @@ const Categories = () => {
           
         {
             categories.map(category=>{
-                return  <Link to={`/categories/${category._id}`}><Category key={category._id} category={category}></Category></Link>
+                return  <Link key={category._id} to={`/categories/${category._id}`}><Category  category={category}></Category></Link>
             })
         }
         </div>

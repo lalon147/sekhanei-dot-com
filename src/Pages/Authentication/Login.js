@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/UserContext";
 import {FcGoogle} from "react-icons/fc"
 import {GridLoader} from "react-spinners"
+import { getUserToken } from "../../utils/getToken";
 const Login = () => {
   const nav=useNavigate()
   const location =useLocation();
@@ -19,8 +20,12 @@ const Login = () => {
     logInWithEmail(data.email,data.password).then(result=>{
       const user=result.user;
       console.log(user)
+      getUserToken(data.email)
       nav(from,{replace:true})
-    })
+    }).catch(error=>{
+      
+      toast.error(`${error.message.slice(10,60)}`) 
+      console.log(error)})
   };
 
   const handleGoogle=()=>{

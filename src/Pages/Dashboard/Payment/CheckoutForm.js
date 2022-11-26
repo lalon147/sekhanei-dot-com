@@ -14,17 +14,21 @@ const CheckoutFomr = ({data}) => {
     const nav=useNavigate()
     useEffect(() => {
       // Create PaymentIntent as soon as the page loads
+      // https://sekhanei-dot-com-server-lalon147.vercel.app
       
       fetch("http://localhost:5000/create-payment-intent", {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
+               authorization:`bearer ${localStorage.getItem("token")}`
               
           },
           body: JSON.stringify({ carPrice }),
       })
           .then((res) => res.json())
-          .then((data) => setClientSecret(data.clientSecret));
+          .then((data) => {
+            console.log(data)
+            setClientSecret(data.clientSecret)});
   }, [carPrice]);
 
   const handleSubmit = async (event) => {
@@ -81,25 +85,32 @@ const CheckoutFomr = ({data}) => {
           email,
           bookingId: _id,seller_email,paid:true,carId
       }
-      fetch("http://localhost:5000/payments",{
+      fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/payments",{
         method:"POST",
         headers:{
-          "content-type":"application/json"
+          "content-type":"application/json",
+           authorization:`bearer ${localStorage.getItem("token")}`
         },
         body:JSON.stringify(payment)
       }).then(res=>res.json()).then(data=>{
-        fetch(`http://localhost:5000/booking/${_id}`,{
+        fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/booking/${_id}`,{
           method:"PUT",
+          headers:{
+            authorization:`bearer ${localStorage.getItem("token")}`
+       }
           
         }).then(res=>res.json()).then(data=>console.log(data))
-        fetch(`http://localhost:5000/cars/${carId}`,{
-          method:"PUT"
+        fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/cars/${carId}`,{
+          method:"PUT",
+          headers:{
+            authorization:`bearer ${localStorage.getItem("token")}`
+       }
         }).then(res=>res.json()).then(data=>{
           console.log(data);
         })
 
         nav("/dashboard/my-orders");
-        window.location.reload()
+        
         // console.log(data)
         })
       

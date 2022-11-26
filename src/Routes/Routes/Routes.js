@@ -40,7 +40,11 @@ export const router=createBrowserRouter([
             },{
                 path:"/categories/:id",
                 element:<PrivateRoute><Cars></Cars></PrivateRoute>,
-                loader:({params})=>fetch(`http://localhost:5000/categories/${params.id}`)
+                loader:({params})=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/categories/${params.id}`,{
+                    headers:{
+                        authorization:`bearer ${localStorage.getItem("token")}`
+                   }
+                })
             },{
                 path:"/blogs",
                 element:<Blogs></Blogs>
@@ -77,7 +81,11 @@ export const router=createBrowserRouter([
             },{
                 path:"/dashboard/payment/:id",
                 element:<Payment></Payment>,
-                loader:({params})=>fetch(`http://localhost:5000/booking/${params.id}`)
+                loader:({params})=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/booking/${params.id}`,{
+                    headers:{
+                        authorization:`bearer ${localStorage.getItem("token")}`
+                   }
+                })
             }
         ]
     },{

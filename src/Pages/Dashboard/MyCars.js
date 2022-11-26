@@ -10,13 +10,13 @@ const MyCars = () => {
      const {user}=useContext(AuthContext);
      const {data:products=[],refetch}=useQuery({
         queryKey:["products"],
-        queryFn:()=>fetch(`http://localhost:5000/cars?email=${user.email}`).then(res=>res.json()).then(data=>{
+        queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/cars?email=${user.email}`).then(res=>res.json()).then(data=>{
             console.log(data);
             return data
         })
      })
      const handleDelete=(id)=>{
-      fetch(`http://localhost:5000/cars/${id}`,{
+      fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/cars/${id}`,{
        method:"DELETE",
        
       }).then(res=>res.json()).then(data=>{
@@ -26,7 +26,7 @@ const MyCars = () => {
   
       })}
       const handleAdvertise=(id)=>{
-        fetch(`http://localhost:5000/cars/${id}`).then(res=>res.json()).then(data=>{
+        fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/cars/${id}`).then(res=>res.json()).then(data=>{
          nav("/")  
         console.log(data)})
       }

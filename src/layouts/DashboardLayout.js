@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { GridLoader } from 'react-spinners';
 import { AuthContext } from '../context/UserContext';
 import useRole from '../hooks/useRole';
 import Header from '../Shared/Header/Header';
 
 const DashboardLayout = () => {
+  
    const {user}=useContext(AuthContext);
-   const [isRole,isRoleLoading]=useRole(user.email);console.log(isRole)
+   const [isRole,isRoleLoading]=useRole(user?.email);console.log(isRole)
+  
+  
+   
    if(isRoleLoading===true){
     return  <div className='flex justify-center'><GridLoader color="#36d7b7" size={60} ></GridLoader></div>
    }

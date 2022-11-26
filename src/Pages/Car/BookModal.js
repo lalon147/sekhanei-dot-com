@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/UserContext';
 
 const BookModal = ({car}) => {
-    const seller_email=car.seller_email
-     const {user}=useContext(AuthContext);
+    const seller_email=car.seller_email;
+    const nav=useNavigate();
+     const {user,logOut}=useContext(AuthContext);
      const handleSubmit=(e)=>{
         e.preventDefault();
         const form=e.target;
@@ -17,15 +19,24 @@ const BookModal = ({car}) => {
         const phone=form.phone.value;
         const booking={name,email,price,carName,carPrice,location,phone,image:car.image,seller_email,carId:car._id}
         console.log(booking);
-        fetch("http://localhost:5000/booking",{
+        fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/booking",{
           method:"POST",
           headers:{
-            "content-type":"application/json"
+            "content-type":"application/json",
+            authorization:`bearer ${localStorage.getItem("token")}`
           },
           body:JSON.stringify(booking)
         }).then(res=>res.json()).then(data=>{
-          toast.success("ITEM BOOKED")
-          console.log(data)})
+          if(data.message==="Forbidden"){
+            toast.error("PLEASE LOGIN AGAIN SOMETHING WEN WRONG")
+            nav("/login")
+            return logOut()
+          }
+          else{
+            toast.success("ITEM BOOKED")
+            console.log(data)
+          }
+          })
 
      }
     return (

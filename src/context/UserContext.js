@@ -20,7 +20,9 @@ const UserContext = ({children}) => {
     }
 
     const logOut=()=>{
-        return signOut(auth)
+        localStorage.removeItem("token")
+        return signOut(auth);
+        
     }
     const logInWithEmail=(email,password)=>{
         return signInWithEmailAndPassword(auth,email,password)

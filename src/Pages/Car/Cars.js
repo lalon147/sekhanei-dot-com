@@ -13,8 +13,8 @@ const Cars = () => {
     return (
         <div className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-5 my-10 mx-10'>
                {
-                cars.map(car=>{
-                    return( !car.sold && <div className="card card-compact w-96 bg-base-100 shadow-xl">
+               cars.length>0 && cars.map(car=>{
+                    return( !car.sold && <div key={car._id} className="card card-compact w-96 bg-base-100 shadow-xl">
                     <figure><img className='h-64 w-full' src={car.image} alt="Shoes" /></figure>
                     <div className="card-body">
                       <h2 className="card-title">NAME:{car.name.toUpperCase()}</h2>

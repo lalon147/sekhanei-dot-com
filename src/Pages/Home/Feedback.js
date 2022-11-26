@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 
 const Feedback = () => {
-     const {user}=useContext(AuthContext);
+     const {user,logOut}=useContext(AuthContext);
      const nav=useNavigate();
      const {data:comments=[],refetch}=useQuery({
         queryKey:["comments"],
-        queryFn:()=>fetch("http://localhost:5000/comments").then(res=>res.json()).then(data=>{
-        console.log(data)
+        queryFn:()=>fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/comments").then(res=>res.json()).then(data=>{
+       
         return data    
         })
      })
@@ -23,21 +23,26 @@ const Feedback = () => {
         e.preventDefault();
         const text=e.target.comment.value;
         const comment={
-            user:user.displayName,email:user.email,image:user.photoURL,comment:text
+            user:user?.displayName,email:user.email,image:user.photoURL,comment:text
         }
         console.log(comment);
         
-        fetch("http://localhost:5000/comments",{
+        fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/comments",{
             method:"POST",
             headers:{
-                "content-type":"application/json"
+                "content-type":"application/json",
+                 authorization:`bearer ${localStorage.getItem("token")}`
             },
             body:JSON.stringify(comment)
         }).then(res=>res.json()).then(data=>{
+          if(data.message==="Forbidden"){
+            toast.error("YOU DON'T HAVE VALID TOKEN PLEASE LOGIN AGAIN ")
+            logOut();
+          }
           refetch();
           toast.success("COMMENT ADDED");
           e.target.reset();
-          console.log(data)})
+          })
     }
 
   return (
@@ -45,7 +50,7 @@ const Feedback = () => {
          <h1 className="text-3xl font-semibold ">What Customers Says About us</h1>
          <div className="w-1/2 mx-auto my-10 grid grid-cols-1 md:grid-cols-3">
                 {
-                    comments.map(comment=>{
+                  comments.length>0 &&  comments?.map(comment=>{
                         return <div key={comment._id} className="chat chat-start">
                         <div className="chat-image avatar">
                           <div className="w-10 rounded-full">

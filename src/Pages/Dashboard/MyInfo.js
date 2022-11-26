@@ -4,13 +4,13 @@ import { AuthContext } from '../../context/UserContext';
 
 const MyInfo = () => {
     const {user}=useContext(AuthContext);
-    const {data=[]}=useQuery({
-        queryKey:["user"],
-        queryFn:()=>fetch(`http://localhost:5000/users?email=${user.email}`).then(res=>res.json()).then(data=>{ 
-            return data
-        })
-    })
-    console.log(data)
+    // const {data=[]}=useQuery({
+    //     queryKey:["user"],
+    //     queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users?email=${user.email}`).then(res=>res.json()).then(data=>{ 
+    //         return data
+    //     })
+    // })
+    // console.log(data)
     ;
     return (
         <div className='flex flex-col md:flex-row justify-center items-center space-x-5 '>

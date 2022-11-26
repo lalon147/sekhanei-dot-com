@@ -7,6 +7,7 @@ import { saveUserToDb } from "../../utils/saveUserToDb";
 import {FcGoogle} from "react-icons/fc";
 
 
+
 const Register = () => {
   const nav=useNavigate();
   const { register, formState: { errors }, handleSubmit } = useForm();
@@ -27,6 +28,7 @@ const Register = () => {
          method:"POST",
          body:formData       
         }).then(res=>res.json()).then(imgData=>{
+               
                profileUpdate(user,data.name,imgData.data.url).then(()=>toast.success("PROFILE UPDATED"))
                saveUserToDb(data.email,data.role,imgData.data.url); 
           })      

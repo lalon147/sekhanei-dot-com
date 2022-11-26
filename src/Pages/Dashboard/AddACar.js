@@ -9,7 +9,7 @@ const AddACar = () => {
      const nav=useNavigate();
      const {data:role={}}=useQuery({
       queryKey:["role"],
-      queryFn:()=>fetch(`http://localhost:5000/users/admin/${user.email}`).then(res=>res.json()).then(data=>{
+      queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/admin/${user.email}`).then(res=>res.json()).then(data=>{
           console.log(data)
           return data;
       })
@@ -17,7 +17,7 @@ const AddACar = () => {
      console.log(role)
      const {data:categories=[]}=useQuery({
         queryKey:["categories"],
-        queryFn:()=>fetch("http://localhost:5000/categories").then(res=>res.json()).then(data=>{
+        queryFn:()=>fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/categories").then(res=>res.json()).then(data=>{
             console.log(data)
             return data;
         })
@@ -39,11 +39,12 @@ const AddACar = () => {
      const car={
         name,company,present_price,past_price,seller_name,seller_email,location,used,posted,image,condition,seller_verified:role.verify
      }
-     
-     fetch("http://localhost:5000/cars",{
+   //   
+     fetch("https://sekhanei-dot-com-server-lalon147.vercel.app/cars",{
         method:"POST",
         headers:{
-            "content-type":"application/json"
+            "content-type":"application/json",
+             authorization:`bearer ${localStorage.getItem("token")}`
         },
         body:JSON.stringify(car)
      }).then(res=>res.json()).then(data=>{

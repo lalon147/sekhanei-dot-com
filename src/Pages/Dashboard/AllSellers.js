@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const AllSellers = () => {
    const handleDelete=(id)=>{
-     fetch(`http://localhost:5000/users/${id}`,{
+     fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/${id}`,{
       method:"DELETE",
       
      }).then(res=>res.json()).then(data=>{
@@ -15,9 +15,9 @@ const AllSellers = () => {
      })
    }
    const handleVeriify=(id,email)=>{
-      fetch(`http://localhost:5000/users/${id}`).then(res=>res.json()).then(data=>{
+      fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/${id}`).then(res=>res.json()).then(data=>{
       refetch()
-      fetch(`http://localhost:5000/cars/verify-seller?email=${email}`,{
+      fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/cars/verify-seller?email=${email}`,{
         method:"POST"
       }).then(res=>res.json()).then(data=>console.log(data)) 
       console.log(data)})
@@ -25,7 +25,7 @@ const AllSellers = () => {
    }
     const {data:sellers=[],refetch}=useQuery({
         queryKey:["user"],
-        queryFn:()=>fetch(`http://localhost:5000/users?email=seller`).then(res=>res.json()).then(data=>{
+        queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users?email=seller`).then(res=>res.json()).then(data=>{
              console.log(data)
              return data
         })

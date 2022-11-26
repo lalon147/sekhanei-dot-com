@@ -1,20 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import {AuthContext} from "../../context/UserContext"
 
 const MyOrders = () => {
       
-      const {user}=useContext(AuthContext)
+      const {user,logOut}=useContext(AuthContext)
       const {data:bookings=[],isLoading}=useQuery({
         queryKey:["user"],
-        queryFn:()=>fetch(`http://localhost:5000/booking?email=${user.email}`).then(res=>res.json()).then(data=>{
+        queryFn:()=>fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/booking?email=${user.email}`,{
+          headers:{
+            authorization:`bearer ${localStorage.getItem("token")}`
+       } 
+        }).then(res=>res.json()).then(data=>{
+          if(data.message==="Forbidden"){
+            toast.error("PLEASE LOGIN AGAIN");
+            logOut()
+
+          }
           return data
           
         })
       })
      
-      console.log(isLoading);
+      console.log(bookings);
     return (
         <div className="overflow-x-auto">
   <table className="table w-full">
@@ -30,7 +40,7 @@ const MyOrders = () => {
     </thead>
     <tbody>
         {
-          bookings.map((booking,index)=>{
+          bookings.length>0 && bookings?.map((booking,index)=>{
             return <tr key={booking._id}>
             <th>{index+1}</th>
             <td><img className='w-12 h-12 rounded-full' src={booking.image} alt=""></img></td>
