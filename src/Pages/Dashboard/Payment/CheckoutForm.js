@@ -94,9 +94,12 @@ const CheckoutFomr = ({data}) => {
         }).then(res=>res.json()).then(data=>console.log(data))
         fetch(`http://localhost:5000/cars/${carId}`,{
           method:"PUT"
-        }).then(res=>res.json()).then(data=>console.log(data))
+        }).then(res=>res.json()).then(data=>{
+          console.log(data);
+        })
 
-        nav("/dashboard/my-orders")
+        nav("/dashboard/my-orders");
+        window.location.reload()
         // console.log(data)
         })
       

@@ -7,6 +7,14 @@ import { AuthContext } from '../../context/UserContext';
 const AddACar = () => {
      const {user}=useContext(AuthContext);
      const nav=useNavigate();
+     const {data:role={}}=useQuery({
+      queryKey:["role"],
+      queryFn:()=>fetch(`http://localhost:5000/users/admin/${user.email}`).then(res=>res.json()).then(data=>{
+          console.log(data)
+          return data;
+      })
+     })
+     console.log(role)
      const {data:categories=[]}=useQuery({
         queryKey:["categories"],
         queryFn:()=>fetch("http://localhost:5000/categories").then(res=>res.json()).then(data=>{
@@ -29,7 +37,7 @@ const AddACar = () => {
         const past_price=form.past_price.value;
         const present_price=form.present_price.value;
      const car={
-        name,company,present_price,past_price,seller_name,seller_email,location,used,posted,image,condition
+        name,company,present_price,past_price,seller_name,seller_email,location,used,posted,image,condition,seller_verified:role.verify
      }
      
      fetch("http://localhost:5000/cars",{

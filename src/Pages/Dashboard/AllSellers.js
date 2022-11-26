@@ -14,6 +14,15 @@ const AllSellers = () => {
 
      })
    }
+   const handleVeriify=(id,email)=>{
+      fetch(`http://localhost:5000/users/${id}`).then(res=>res.json()).then(data=>{
+      refetch()
+      fetch(`http://localhost:5000/cars/verify-seller?email=${email}`,{
+        method:"POST"
+      }).then(res=>res.json()).then(data=>console.log(data)) 
+      console.log(data)})
+      
+   }
     const {data:sellers=[],refetch}=useQuery({
         queryKey:["user"],
         queryFn:()=>fetch(`http://localhost:5000/users?email=seller`).then(res=>res.json()).then(data=>{
@@ -32,7 +41,8 @@ console.log(sellers);
         <th>IMAGE</th>
         <th>EMAIL</th>
         <th>ROLE</th>
-        <th>DELETE</th>       
+        <th>DELETE</th>
+        <th>VERIFY</th>       
       </tr>
     </thead>
     <tbody>       
@@ -44,6 +54,7 @@ console.log(sellers);
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
                 <td><button onClick={()=>handleDelete(seller._id)} className='btn btn-xs bg-blue-500'>DELETE</button></td>
+                <td>{seller.seller_verified ? "VERIFIED" :<button onClick={()=>handleVeriify(seller._id,seller.email)} className='btn btn-xs bg-blue-500'>VERIFY</button>}</td>
               </tr>
             })
         }
