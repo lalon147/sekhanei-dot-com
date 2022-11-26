@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/UserContext";
 import { saveUserToDb } from "../../utils/saveUserToDb";
-
+import {FcGoogle} from "react-icons/fc";
 
 
 const Register = () => {
   const nav=useNavigate();
   const { register, formState: { errors }, handleSubmit } = useForm();
-  const {createUser,profileUpdate}=useContext(AuthContext); const imgHostKey=process.env.REACT_APP_IMAGE 
-
-  const handleRegister=async(data)=>{
+  const {createUser,profileUpdate,logInWithGoogle}=useContext(AuthContext); const imgHostKey=process.env.REACT_APP_IMAGE 
+  const location =useLocation();
+  const from =location.state?.from?.pathname || "/"
+  const handleRegister=async(data)=>{     
    const image=data.image[0]; 
    const formData=new FormData();
    formData.append("image",image);
@@ -30,7 +31,7 @@ const Register = () => {
                saveUserToDb(data.email,data.role,imgData.data.url); 
           })      
      
-      nav("/")
+      nav(from ,{replace:true})
       console.log(user)})
      .catch(error=>{
       toast.error(`${error.message.slice(10,60)}`) 
@@ -38,21 +39,18 @@ const Register = () => {
     
 
   }
+  const handleGoogle=()=>{
+    logInWithGoogle().then(result=>{
+      const user=result.user;
+      console.log(user);
+      saveUserToDb(user.email,"user",user.photoURL);nav(from ,{replace:true})
+   }).catch(error=>{
+     const message=error.message.slice(10,50);
+     toast.error(`${message}`)
+   })
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center w-11/12 mx-auto">
@@ -96,8 +94,10 @@ const Register = () => {
             <option value="seller">SELLER</option>
           </select>
           {errors.role && toast.error("ROLE IS REQUIRED")}
-          <button type="submit" className="btn w-full btn-outline bg-blue-500">REGISTER</button>
+          <button type="submit" className="border-0 btn w-full btn-outline bg-blue-500">REGISTER</button>        
         </form>
+        <br></br>
+        <button onClick={handleGoogle} className="btn w-full btn-outline bg-blue-600 text-white">CONTINUE WITH GOOGLE <FcGoogle className="mx-2"></FcGoogle></button>
       </div>
 
       

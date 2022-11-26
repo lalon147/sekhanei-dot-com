@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { HashLoader } from 'react-spinners';
+import { GridLoader } from 'react-spinners';
 import { AuthContext } from '../context/UserContext';
 import useRole from '../hooks/useRole';
 import Header from '../Shared/Header/Header';
@@ -9,7 +9,7 @@ const DashboardLayout = () => {
    const {user}=useContext(AuthContext);
    const [isRole,isRoleLoading]=useRole(user.email);console.log(isRole)
    if(isRoleLoading===true){
-    return  <div className='flex justify-center'><HashLoader color="#36d7b7" ></HashLoader></div>
+    return  <div className='flex justify-center'><GridLoader color="#36d7b7" size={60} ></GridLoader></div>
    }
     return (
         <div>

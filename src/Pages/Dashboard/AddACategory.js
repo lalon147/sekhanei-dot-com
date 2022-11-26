@@ -1,6 +1,9 @@
 import React from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddACategory = () => {
+    const nav=useNavigate()
      const handleSubmit=(e)=>{
         e.preventDefault();
         const form=e.target;
@@ -14,7 +17,11 @@ const AddACategory = () => {
                 "content-type":"application/json"
             },
             body:JSON.stringify(category)
-        }).then(res=>res.json()).then(data=>console.log(data))
+        }).then(res=>res.json()).then(data=>{
+            toast.success("CATEGORY ADDED SUCESSFULLY ")
+            form.reset();
+            nav("/")
+            console.log(data)})
         console.log()
      }
     return (
@@ -23,7 +30,7 @@ const AddACategory = () => {
              <input placeholder='TYPE THE NAME OF CAR ' name='name' className='input input-bordered'></input>
              <input placeholder='PASTE THE IMAGE URL OF CATEGORY ' name="image"className='input input-bordered'></input>
              <input placeholder='TYPE THE NAME OF COMPANY' name="company" className='input input-bordered'></input>
-             <input type="submit" className='btn bg-blue-500'></input>
+             <input type="submit" className='btn bg-blue-500' value={"SUBMIT"}></input>
         </form>
     );
 };

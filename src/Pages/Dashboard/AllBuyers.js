@@ -29,9 +29,9 @@ const AllBuyers = () => {
     <thead>
       <tr>
         <th></th>
-        <th>EMAIL</th>
-        <th>ROLE</th>
         <th>IMAGE</th>
+        <th>EMAIL</th>
+        <th>ROLE</th>  
         <th>DELETE</th>       
       </tr>
     </thead>
@@ -40,9 +40,9 @@ const AllBuyers = () => {
             buyers.map((seller,index)=>{
                 return <tr key={seller._id}>
                 <th>{index+1}</th>
+                <td><img src={seller.img} className="w-12 h-12 rounded-full" alt=""/></td>
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
-                <td><img src={seller.img} className="w-12 h-12 rounded-full" alt=""/></td>
                 <td><button onClick={()=>handleDelete(seller._id)} className='btn btn-xs bg-blue-500'>DELETE</button></td>
               </tr>
             })

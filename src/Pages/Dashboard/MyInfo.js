@@ -6,11 +6,11 @@ const MyInfo = () => {
     const {user}=useContext(AuthContext);
     const {data=[]}=useQuery({
         queryKey:["user"],
-        queryFn:()=>fetch(`http://localhost:5000/users?email=${user.email}`).then(res=>res.json()).then(data=>{
-            
+        queryFn:()=>fetch(`http://localhost:5000/users?email=${user.email}`).then(res=>res.json()).then(data=>{ 
             return data
         })
     })
+    console.log(data)
     ;
     return (
         <div className='flex flex-col md:flex-row justify-center items-center space-x-5 '>
@@ -18,7 +18,7 @@ const MyInfo = () => {
             <div className='shadow-lg p-4'>
                <p className='text-xl text-left font-bold'>NAME:{user.displayName}</p>
                <p className='text-xl text-left font-bold'>EMAIL:{user.email}</p>
-               <p className='text-xl text-left font-bold'>ROLE:{data[0]?.role}</p>
+               
             </div >
         </div>
     );

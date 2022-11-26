@@ -3,10 +3,17 @@ import Banner from './Banner';
 import Categories from './Categories';
 import Feedback from './Feedback';
 import Advertisement from './Advertisement';
+import { GridLoader } from 'react-spinners';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/UserContext';
 
 
 const Home = () => {
-    console.log(new Date())
+    const {loading}=useContext(AuthContext);
+    console.log(new Date());
+    if(loading){
+        return <GridLoader size={60} color="#36d7b7" />
+      }
      
     return (
         <div>

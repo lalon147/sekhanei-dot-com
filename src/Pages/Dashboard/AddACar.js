@@ -21,6 +21,7 @@ const AddACar = () => {
         const image=form.image.value;
         const company=form.company.value;
         const posted=form.posted.value;
+        const condition=form.condition.value;
         const location=form.location.value;
         const used=`${form.used.value} years`;
         const seller_name=form.seller_name.value;
@@ -28,7 +29,7 @@ const AddACar = () => {
         const past_price=form.past_price.value;
         const present_price=form.present_price.value;
      const car={
-        name,company,present_price,past_price,seller_name,seller_email,location,used,posted,image
+        name,company,present_price,past_price,seller_name,seller_email,location,used,posted,image,condition
      }
      
      fetch("http://localhost:5000/cars",{
@@ -52,6 +53,12 @@ const AddACar = () => {
            {
             categories?.map(category=><option key={category._id} value={category.company}>{category.name}</option>)
            }
+        </select>
+        <select name="condition" className="select select-bordered">
+           <option disabled>CONDITION OF CAR</option>
+           <option value="EXCELLENT">EXCEELLENT</option>
+           <option value="GOOD">GOOD</option>
+           <option value="FAIR">FAIR</option>
         </select>
         <input placeholder='HOW MANY YEARS USED' name="used" className='input input-bordered'></input>
         <input placeholder='PRESENT PRICE'  name="present_price" className='input input-bordered'></input>

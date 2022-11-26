@@ -3,13 +3,17 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/UserContext";
-
+import {FcGoogle} from "react-icons/fc"
+import {GridLoader} from "react-spinners"
 const Login = () => {
   const nav=useNavigate()
   const location =useLocation();
   const from =location.state?.from?.pathname || "/"
   const { register,formState: { errors }, handleSubmit,} = useForm();
- const {logInWithEmail}=useContext(AuthContext)
+ const {logInWithEmail,logInWithGoogle,loading}=useContext(AuthContext)
+ if(loading){
+   return <GridLoader size={60} color="#36d7b7" />
+ }
   const handleLogin = (data) => {
     console.log(data);
     logInWithEmail(data.email,data.password).then(result=>{
@@ -18,6 +22,17 @@ const Login = () => {
       nav(from,{replace:true})
     })
   };
+
+  const handleGoogle=()=>{
+    logInWithGoogle().then(result=>{
+      const user=result.user;
+      console.log(user);
+      nav(from ,{replace:true})
+   }).catch(error=>{
+     const message=error.message.slice(10,50);
+     toast.error(`${message}`)
+   })
+  }
 
   return (
     <div className="flex flex-col md:flex-row  items-center justify-evenly ">
@@ -50,6 +65,8 @@ const Login = () => {
           </button>
            <p className="text-blue-600"> <Link to="/register">DON'T HAVE AN ACCOUNT SIGN-UP</Link></p>
         </form>
+        <br></br>
+        <button onClick={handleGoogle} className="btn w-full btn-outline bg-blue-600 text-white">CONTINUE WITH GOOGLE <FcGoogle className="mx-2"></FcGoogle></button>
       </div>
     </div>
   );

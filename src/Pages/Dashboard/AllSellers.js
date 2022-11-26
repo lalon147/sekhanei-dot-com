@@ -29,7 +29,7 @@ console.log(sellers);
     <thead>
       <tr>
         <th></th>
-        
+        <th>IMAGE</th>
         <th>EMAIL</th>
         <th>ROLE</th>
         <th>DELETE</th>       
@@ -40,9 +40,9 @@ console.log(sellers);
             sellers.map((seller,index)=>{
                 return <tr key={seller._id}>
                 <th>{index+1}</th>
+                <th><img src={seller.img} className="w-12 h-12 rounded-full"/></th>
                 <td>{seller.email}</td>
                 <td>{seller.role}</td>
-                <td>{seller._id}</td>
                 <td><button onClick={()=>handleDelete(seller._id)} className='btn btn-xs bg-blue-500'>DELETE</button></td>
               </tr>
             })
