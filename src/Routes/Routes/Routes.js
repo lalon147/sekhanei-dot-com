@@ -18,6 +18,7 @@ import Home from "../../Pages/Home/Home";
 import NotFound from "../../Pages/NotFound/NotFound";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute"
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 
 export const router=createBrowserRouter([
@@ -66,13 +67,13 @@ export const router=createBrowserRouter([
 
             },{
                 path:"/dashboard/add-a-car",
-                element:<AddACar></AddACar>
+                element:<SellerRoute><AddACar></AddACar></SellerRoute>
             },{
                 path:"/dashboard/my-orders",
                 element:<MyOrders></MyOrders>
             },{
                 path:"/dashboard/my-cars",
-                element:<MyCars></MyCars>
+                element:<SellerRoute><MyCars></MyCars></SellerRoute>
             },{
                 path:"/dashboard/payment/:id",
                 element:<Payment></Payment>,
