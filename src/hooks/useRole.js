@@ -7,11 +7,11 @@ const useRole=(email)=>{
     const [isRole,setIsRole]=useState(false)
     const [isRoleLoading,setIsRoleLoading]=useState(true)
     
-    // https://sekhanei-dot-com-server-lalon147.vercel.app
+    // 
     //sekhanei-dot-com-server-lalon147.vercel.app
     useEffect(()=>{
         if(email){
-            fetch(`http://localhost:5000/users/admin/${email}`)
+            fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/admin/${email}`)
             .then(res=>res.json())
              .then(data=>{
                 console.log(data)
