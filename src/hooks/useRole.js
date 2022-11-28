@@ -11,7 +11,12 @@ const useRole=(email)=>{
     //sekhanei-dot-com-server-lalon147.vercel.app
     useEffect(()=>{
         if(email){
-            fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/admin/${email}`)
+            fetch(`https://sekhanei-dot-com-server-lalon147.vercel.app/users/admin/${email}`,{
+                headers:{
+                    
+                    authorization:`bearer ${localStorage.getItem("token")}`
+                  }
+            })
             .then(res=>res.json())
              .then(data=>{
                 console.log(data)
