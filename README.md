@@ -9,7 +9,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## LIVE SITE:
+## LIVE SITE:https://fir-auth-practice-9715f.firebaseapp.com/
 
 In the project directory, you can run:
 
